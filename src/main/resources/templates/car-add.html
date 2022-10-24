@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container w-50 p-3">
+    <h1 class="display-5">Add Car</h1>
+
+    <form th:action="@{/car/add}" method="POST">
+
+        <div class="mb-3">
+            <label for="inputCarType">Car Type</label>
+            <select id="inputCarType" class="form-select" name="carType">
+                <option value="SUV">SUV</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Trucks">Trucks</option>
+                <option value="Coupe">Coupe</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputTier">Tier</label>
+            <input id="inputTier" type="text" class="form-control" name="tier">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputIssueDate" class="form-label">Issue Date</label>
+            <input id="inputIssueDate" type="date" class="form-control" name="issueDate">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputDistance" class="form-label">Distance</label>
+            <input id="inputDistance" type="text" class="form-control" name="distance">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="inputGearSystem">Gear System</label>
+            <select id="inputGearSystem" class="form-select" name="gearSystem">
+                <option value="Automatic" selected>Automatic Transmission</option>
+                <option value="Manual">Manual Transmission</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputRegistrationYear" class="form-label">Registration Year</label>
+            <input id="inputRegistrationYear" type="text" class="form-control" name="registrationYear">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputCapacity" class="form-label">Capacity</label>
+            <input id="inputCapacity" type="text" class="form-control" name="capacity">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputColor" class="form-label">Color</label>
+            <input id="inputColor" type="text" class="form-control" name="color">
+        </div>
+
+
+        <button id="submit-button" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car2 Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container">
+    <h1 class="display-5">Cars</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Car type</th>
+            <th>Tier</th>
+            <th>Issue date</th>
+            <th>Distance</th>
+            <th>Gear system</th>
+            <th>Registration year</th>
+            <th>Capacity</th>
+            <th>Color</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.carType}"></td>
+            <td th:text="${car.tier}"></td>
+            <td th:text="${car.issueDate}"></td>
+            <td th:text="${car.distance}"></td>
+            <td th:text="${car.gearSystem}"></td>
+            <td th:text="${car.registrationYear}"></td>
+            <td th:text="${car.capacity}"></td>
+            <td th:text="${car.color}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="btn btn-primary" th:href="@{/car/add}">Add a new car</a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

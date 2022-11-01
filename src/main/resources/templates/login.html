@@ -9,27 +9,29 @@
 <body>
 
 <div class="container w-25 p-3">
-    <h1 class="display-5 text-center">Login</h1>
+    <h1 class="display-5 text-center">เข้าสู่ระบบ</h1>
 
     <form th:action="@{/login}" method="POST">
         <div id="error-msg" th:if="${param.error}" class="alert alert-danger">
-            Invalid username or password
+            ชื่อผู้ใช้หรือรหัสผ่านผิด
         </div>
         <div id="logout-msg" th:if="${param.logout}" class="alert alert-success">
-            You have been logged out
+            คุณได้ออกจากระบบแล้ว
         </div>
         <div class="mb-3">
-            <label for="inputUsername">Username</label>
+            <label for="inputUsername">ชื่อผู้ใช้</label>
             <input type="text" name="username" id="inputUsername"
                    class="form-control bg-secondary text-white" required>
         </div>
         <div class="mb-3">
-            <label for="inputPassword">Password</label>
+            <label for="inputPassword">รหัสผ่าน</label>
             <input type="password" name="password" id="inputPassword"
                    class="form-control bg-secondary text-white" required>
         </div>
             <div class="text-center">
-                <button id="submit-button" type="submit" class="btn btn-warning btn-block">Login</button>
+                <a class="text-black" href="/signup">ลงทะเบียน</a>
+                <br/>
+                <button id="submit-button" type="submit" class="btn btn-warning btn-block mt-3">เข้าสู้ระบบ</button>
             </div>
     </form>
 </div>

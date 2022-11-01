@@ -9,7 +9,7 @@
 <body>
 
 <div class="container w-50 p-3">
-    <h1 class="display-5">Sign Up</h1>
+    <h1 class="display-5">ลงทะเบียน</h1>
 
     <form action="#" th:action="@{/signup}" th:object="${signupDto}" method="POST">
 
@@ -23,7 +23,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="inputFirstName">First Name</label>
+            <label for="inputFirstName">ชื่อ</label>
             <input id="inputFirstName" type="text" class="form-control"
                    th:field="*{firstName}">
             <div class="alert alert-warning"
@@ -31,7 +31,7 @@
                  th:errors="*{firstName}"></div>
         </div>
         <div class="mb-3">
-            <label for="inputLastName">Last Name</label>
+            <label for="inputLastName">นามสกุล</label>
             <input id="inputLastName" type="text" class="form-control"
                    th:field="*{lastName}">
             <div class="alert alert-warning"
@@ -39,7 +39,7 @@
                  th:errors="*{lastName}"></div>
         </div>
         <div class="mb-3">
-            <label for="inputRegistrationNumber">Registration Number</label>
+            <label for="inputRegistrationNumber">เลขบัตรประชาชน</label>
             <input id="inputRegistrationNumber" type="text" class="form-control"
                    th:field="*{registrationNumber}">
             <div class="alert alert-warning"
@@ -47,7 +47,7 @@
                  th:errors="*{registrationNumber}"></div>
         </div>
         <div class="mb-3">
-            <label for="inputPhoneNumber">Phone Number</label>
+            <label for="inputPhoneNumber">เบอร์โทรศัพท์</label>
             <input id="inputPhoneNumber" type="text" class="form-control"
                    th:field="*{phoneNumber}">
             <div class="alert alert-warning"
@@ -55,7 +55,7 @@
                  th:errors="*{phoneNumber}"></div>
         </div>
         <div class="mb-3">
-            <label for="inputUsername">Username</label>
+            <label for="inputUsername">ชื่อผู้ใช้</label>
             <input id="inputUsername" type="text" class="form-control"
                    th:field="*{username}">
             <div class="alert alert-warning"
@@ -63,7 +63,7 @@
                  th:errors="*{username}"></div>
         </div>
         <div class="mb-3">
-            <label for="inputPassword">Password</label>
+            <label for="inputPassword">รหัสผ่าน</label>
             <input id="inputPassword" type="password" class="form-control"
                    th:field="*{password}">
             <div class="alert alert-warning"
@@ -80,7 +80,7 @@
                  th:if="${#fields.hasErrors('role')}"
                  th:errors="*{role}"></div>
         </div>
-        <button id="submit-button" type="submit" class="btn btn-primary">Sign Up</button>
+        <button id="submit-button" type="submit" class="btn btn-warning">ลงทะเบียน</button>
     </form>
 </div>
 

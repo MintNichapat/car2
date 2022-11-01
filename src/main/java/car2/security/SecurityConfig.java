@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -24,12 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImp userDetailsService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.userDetailsService(userDetailsService)
                 .authorizeRequests()
-                .antMatchers("/", "/signup",
+                .antMatchers("/signup",
                         "/css/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
-        .and()
+                .and()
                 .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/", true)
                 .permitAll()
@@ -39,9 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll();
-
     }
-
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(12);

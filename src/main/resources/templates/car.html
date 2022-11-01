@@ -4,49 +4,81 @@
     <meta charset="UTF-8">
     <title>Car2 Web Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
 <div th:insert="fragments/header :: header"></div>
 
-<div class="container">
-    <h1 class="display-5">Cars</h1>
+<div class="container-fluid p-0 pt-3">
+    <div class="row bg-warning w-75 rounded-4 mx-auto" style="height: 50px;">
+        <button class="btn mx-5 my-1 w-auto" type="button">
+            <a class="text-black text-decoration-none" th:href="@{/car}">ซื้อรถยนต์</a>
+        </button>
+        <button class="btn me-4 my-1 w-auto" type="button">
+            <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
+        </button>
+        <div class="dropdown w-auto h-75">
+            <button class="btn dropdown-toggle mx-4 my-2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                ประเมินราคารถยนต์
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                <li><a class="dropdown-item" th:href="@{/}">Action</a></li>
+                <li><a class="dropdown-item" th:href="@{/car}">Another action</a></li>
+                <li><a class="dropdown-item" th:href="@{/car/add}">Something else here</a></li>
+            </ul>
+        </div>
+        <input type="search"  class="form-control w-25 h-75 my-2 ms-auto me-4 rounded-4 bg-light" th:placeholder="ค้นรถยนต์"/>
+    </div>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Car type</th>
-            <th>Tier</th>
-            <th>Issue date</th>
-            <th>Distance</th>
-            <th>Gear system</th>
-            <th>Registration year</th>
-            <th>Capacity</th>
-            <th>Color</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="car : ${cars}">
-            <td th:text="${car.carType}"></td>
-            <td th:text="${car.tier}"></td>
-            <td th:text="${car.issueDate}"></td>
-            <td th:text="${car.distance}"></td>
-            <td th:text="${car.gearSystem}"></td>
-            <td th:text="${car.registrationYear}"></td>
-            <td th:text="${car.capacity}"></td>
-            <td th:text="${car.color}"></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-            <a class="btn btn-primary" th:href="@{/car/add}">Add a new car</a>
-        </li>
-    </ul>
+    <div class=" row w-75 mx-auto" >
+        <div class="col-1 mx-auto mt-5 car-list" th:each="car:${cars}">
+            <div class="d-block w-100 bg-black car-img ">
+                <img class="d-block mx-auto img-fluid car-img" style="height: 300px;" th:src="${car.img}"/>
+            </div>
+            <div class="d-flex w-100 car-detail">
+                <div class="pt-2" style="width: 60%;">
+                    <span class="fw-bold" id="tier" th:text="${car.tier}"></span>
+                    <br/>
+                    <span class="fw-bold" th:text="${car.carType} + ' ' + ${car.registrationYear}"></span>
+                    <br/>
+                    <span class="text-warning numbers" th:text="${car.gearSystem} + ' ' + ${car.distance} + ' km'"></span>
+                </div>
+                <div class="text-center pt-2 " style="width: 40%;">
+                    <button class="btn btn-warning border-0 price py-4" style="width: 90%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <span class="fw-bold text-white" id="price" th:text="'฿ ' + ${car.price}"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ยืนยันการสั่งซื้อ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="">ท่านต้องการซื้อรถยนต์คันนี้หรือไม่</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">ตัดสินใจก่อน</button>
+<!--                    <form th:action="@{/car/update/sold}" method="POST">-->
+                        <button type="submit" class="btn btn-warning text-white" data-bs-dismiss="modal">ซื้อเลย!</button>
+<!--                    </form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:insert="fragments/footer :: footer"></div>
 </div>
-
+<!--<script type="text/javascript">-->
+<!--    $("#submit").click(function () {-->
+<!--        var text = $("#tier").val();-->
+<!--        $("#modal_body").html(text);-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>

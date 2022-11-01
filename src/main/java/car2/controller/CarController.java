@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/car")
 public class CarController {
@@ -20,6 +23,12 @@ public class CarController {
         return "car";
     }
 
+
+    @ResponseBody
+    public void getCar(Model model, @RequestParam UUID id) {
+        System.out.println(id);
+//        model.addAttribute("car", carService.getCarById(id));
+    }
     @GetMapping("/add")
     public String getAddPage() {
         return "car-add";
@@ -27,8 +36,13 @@ public class CarController {
 
     @PostMapping("/add")
     public String addCar(@ModelAttribute Car car, Model model) {
+        car.setStatus("sale");
         carService.create(car);
         return "redirect:/car";
     }
 
+    @PostMapping("/update/sold")
+    public void updateSoldStatus(@ModelAttribute Car car, Model model){
+//        System.out.println(car);
+    }
 }

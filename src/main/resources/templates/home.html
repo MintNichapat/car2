@@ -1,29 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Car2 Web Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div th:insert="fragments/header :: header"></div>
 
-<div class="container" style="height: 3000px;">
-
-    <h1 class="display-6">Welcome to Car2 Web Application</h1>
-
-    <p>
-        <span th:text="${greeting}"></span>, you!
-    </p>
-
-    <div sec:authorize="isAuthenticated()">
-        <p>Khun <b><span sec:authentication="name"></span></b></p>
+<div class="container-fluid p-0">
+    <div class="background pt-3" style="height: 500px;">
+        <div class="row bg-white w-75 rounded-4 mx-auto" style="height: 50px;">
+            <button class="btn mx-5 my-1 w-auto" type="button">
+                <a class="text-black text-decoration-none" th:href="@{/car}">ซื้อรถยนต์</a>
+            </button>
+            <button class="btn me-4 my-1 w-auto" type="button">
+                <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
+            </button>
+            <div class="dropdown w-auto h-75">
+                <button class="btn dropdown-toggle mx-4 my-2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    ประเมินราคารถยนต์
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <li><a class="dropdown-item" th:href="@{/}">Action</a></li>
+                    <li><a class="dropdown-item" th:href="@{/car}">Another action</a></li>
+                    <li><a class="dropdown-item" th:href="@{/car/add}">Something else here</a></li>
+                </ul>
+            </div>
+            <input type="search"  class="form-control w-25 h-75 my-2 ms-auto me-4 rounded-4 bg-light" th:placeholder="ค้นรถยนต์"/>
+        </div>
     </div>
-    <div sec:authorize="isAnonymous()">
-        <a class="btn btn-primary" th:href="@{/login}">Login</a>
-        <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
+
+    <div class="mx-auto my-3">
+        <h4 class="text-center">DO YOU WANT TO SELL A CAR?</h4>
+    </div>
+    <div class="w-75 mx-auto">
+        <p>TYPE</p>
+        <div class="row w-100 border border-1 border-dark rounded-3 px-3 py-5">
+            <button class="col border-0 bg-white" type="button">
+                <img class="pb-2" src="/images/suv.png"/>
+                <br/>
+                <a class="text-decoration-none text-black" th:href="@{/}">SUV</a>
+            </button>
+            <button class="col border-0 bg-white" type="button">
+                <img class="pb-2" src="/images/sedan.png" />
+                <br/>
+                <a class="text-decoration-none text-black" th:href="@{/}">Sedan</a>
+            </button>
+            <button class="col border-0 bg-white" type="button">
+                <img class="pb-2" src="/images/trucks.png" />
+                <br/>
+                <a class="text-decoration-none text-black" th:href="@{/}">Trucks</a>
+            </button>
+            <button class="col border-0 bg-white" type="button">
+                <img class="pb-2" src="/images/coupe.png" />
+                <br/>
+                <a class="text-decoration-none text-black" th:href="@{/}">Coupe</a>
+            </button>
+        </div>
     </div>
 
 </div>

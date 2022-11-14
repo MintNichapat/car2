@@ -23,4 +23,8 @@ public class UserService {
         User record = userRepo.save(user);
         return record;
     }
+
+    public User getByUsername(String username){
+        return userRepo.findByUsername(username);
+    }
 }

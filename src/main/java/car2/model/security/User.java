@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import java.util.UUID;
 
 @Data
@@ -27,6 +28,9 @@ public class User {
 
     private String username;
     private String registrationNumber;
+
+    @Lob
+    private String img;
 
     public UUID getId() {
         return id;
@@ -92,6 +96,11 @@ public class User {
         this.username = username;
     }
 
+    public String getImg() {
+        return img;
+    }
 
+    public void setImg(String img) {
+        this.img = img;
+    }
 }
-

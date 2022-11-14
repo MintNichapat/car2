@@ -1,5 +1,13 @@
 package car2.controller;
 
+import car2.model.security.User;
+import car2.repo.UserRepo;
+import car2.service.UserService;
+import car2.serviceImp.UserDetailsServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        model.addAttribute("greeting", "Sawaddee");
+    @Autowired
+    private UserDetailsServiceImp userDetailsService;
+    private UserService userService;
 
+    @RequestMapping("/")
+    public String getHomePage(Model model, Authentication auth) {
+        /*UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();*/
+//        System.out.println(userDetails);
+//        model.addAttribute("user", userService.getByUsername(userDetails.getUsername()));
         // ต้องคืนค่าเป็นชื่อไฟล์ html template โดยในเมธอดนี้ คืนค่าเป็น home.html
         return "home";
     }
-
 }

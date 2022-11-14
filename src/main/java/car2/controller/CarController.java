@@ -3,6 +3,7 @@ package car2.controller;
 import car2.model.master.Car;
 import car2.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +42,11 @@ public class CarController {
         return "redirect:/car";
     }
 
-    @PostMapping("/update/sold")
-    public void updateSoldStatus(@ModelAttribute Car car, Model model){
-//        System.out.println(car);
+    @GetMapping("/update/sold/{id}")
+    public String updateSoldStatus(Model model, @PathVariable UUID id){
+        /*เรียกใช้ service ที่ส่ง id ไปแก้ไขสถานะ*/
+        carService.updateSoldStatus(id);
+        System.out.println("worked! id = "+ id);
+        return "redirect:/car";
     }
 }

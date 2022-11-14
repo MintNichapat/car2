@@ -20,26 +20,30 @@
         <div class="collapse navbar-collapse"></div>
         <div sec:authorize="isAuthenticated()">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link text-white" href="#">สวัสดี <b><span sec:authentication="name"></span></b></a>-->
-<!--                </li>-->
                 <li class="nav-item">
-
-                    <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+                    <a class="nav-link text-white d-flex" href="#">
+                        <div class="d-block w-100 bg-black car-img mx-3">
+                            <img class="d-block mx-auto img-fluid car-img bg-warning rounded-circle p-2" style="width: 60px; height: 60px;" src="/images/user.png"/>
+                        </div>
+                         <b class=" my-3">สวัสดี<span class="ms-2" sec:authentication="name"></span></b>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-warning my-3" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
         </div>
-<!--        <div sec:authorize="isAnonymous()">-->
-<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
-<!--                <li class="nav-item border-end border-white text-center" style="width: 100px;">-->
-<!--                    <a class="btn btn-light rounded-5 my-1 py-1" style="width: 75px; height: 30px;" th:href="@{/signup}">Signup</a>-->
-<!--                </li>-->
+        <div sec:authorize="isAnonymous()">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item border-end border-white text-center" style="width: 100px;">
+                    <a class="btn btn-light rounded-5 my-1 py-1" style="width: 75px; height: 30px;" th:href="@{/signup}">Signup</a>
+                </li>
 
-<!--                <li class="nav-item text-center" style="width: 100px;">-->
-<!--                    <a class="btn btn-warning rounded-5 my-1 py-1" style="width: 75px; height: 30px;" th:href="@{/login}">Login</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
+                <li class="nav-item text-center" style="width: 100px;">
+                    <a class="btn btn-warning rounded-5 my-1 py-1" style="width: 75px; height: 30px;" th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 

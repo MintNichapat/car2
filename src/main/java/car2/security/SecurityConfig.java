@@ -27,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.userDetailsService(userDetailsService)
                 .authorizeRequests()
-                .antMatchers("/signup",
-                        "/css/**", "/js/**").permitAll()
+                .antMatchers("/signup", "/",
+                        "/css/**", "/js/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
@@ -52,51 +52,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/h2-console/**");
     }
-
-
-//    @Value("${auth0.audience}")
-//    private String audience;
-//
-//    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-//    private String issuer;
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .anyRequest()
-//                .authenticated()
-//
-//                // use stateless session, so user's state is not stored
-//                .and()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//
-//                // use oauth as a resource server to do jwt validation
-//                .and()
-//                .oauth2ResourceServer()
-//                .jwt()
-//                .decoder(jwtDecoder());
-//
-//
-//    }
-//    private JwtDecoder jwtDecoder() {
-//        OAuth2TokenValidator<Jwt> withAudience =
-//                new AudienceValidator(audience);
-//
-//        OAuth2TokenValidator<Jwt> withIssuer =
-//                JwtValidators.createDefaultWithIssuer(issuer);
-//
-//        OAuth2TokenValidator<Jwt> validator =
-//                new DelegatingOAuth2TokenValidator<>(withAudience, withIssuer);
-//
-//        NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder)
-//                JwtDecoders.fromOidcIssuerLocation(issuer);
-//
-//        jwtDecoder.setJwtValidator(validator);
-//
-//        return jwtDecoder;
-//    }
 
 }

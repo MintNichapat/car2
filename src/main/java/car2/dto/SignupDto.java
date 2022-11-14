@@ -2,6 +2,7 @@ package car2.dto;
 
 import lombok.Data;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -36,5 +37,6 @@ public class SignupDto {
             message = "Role is in an incorrect format.")
     private String role;
 
-
+    @Lob
+    private String img;
 }

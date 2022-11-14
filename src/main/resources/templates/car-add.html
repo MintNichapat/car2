@@ -57,7 +57,7 @@
             <input id="inputTier" type="text" class="form-control" name="tier">
         </div>
         <div class="mb-3">
-            <label for="inputIssueDate" class="form-label">ปีที่ผลิต</label>
+            <label for="inputIssueDate" class="form-label">วัน/เดือน/ปี ที่ผลิต</label>
             <input id="inputIssueDate" type="date" class="form-control" name="issueDate">
         </div>
         <div class="mb-3">
@@ -76,7 +76,7 @@
             <input id="inputRegistrationYear" type="text" class="form-control" name="registrationYear">
         </div>
         <div class="mb-3">
-            <label for="inputCapacity" class="form-label">ความจะเครื่องยนต์</label>
+            <label for="inputCapacity" class="form-label">ความจุเครื่องยนต์</label>
             <input id="inputCapacity" type="text" class="form-control" name="capacity">
         </div>
         <div class="mb-3">
@@ -110,10 +110,8 @@
             previewImage.style.display = "block";
 
             reader.addEventListener("load", function (){
-                console.log(this.result)
                 imgFile.setAttribute("src", this.result)
                 img.value = this.result;
-                console.log(img)
                 previewImage.setAttribute("src", this.result);
             });
 

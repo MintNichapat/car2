@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>Restaurant Web Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/style.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
 <div class="container w-50 p-3">
-    <h1 class="display-5">ลงทะเบียน</h1>
+    <h1 class="display-5 text-center">ลงทะเบียน</h1>
 
     <form action="#" th:action="@{/signup}" th:object="${signupDto}" method="POST">
 
@@ -21,7 +22,15 @@
              th:if="${signupError}">
             <span th:text="${signupError}"></span>
         </div>
-
+        <div>
+            <label class="mt-3" for="img">รูปโปรไฟล์</label>
+            <div class="image-preview" id="imagePreview">
+                <img src="" alt="Image Preview" class="image-preview__image"/>
+                <span class="image-preview__default-text">Image Preview</span>
+            </div>
+            <input class="pt-2" type="file" id="imgFile">
+            <input class="pt-2" type="text" hidden name="img" id="img" th:field="*{img}">
+        </div>
         <div class="mb-3">
             <label for="inputFirstName">ชื่อ</label>
             <input id="inputFirstName" type="text" class="form-control"
@@ -83,6 +92,36 @@
         <button id="submit-button" type="submit" class="btn btn-warning">ลงทะเบียน</button>
     </form>
 </div>
+<script>
+    const img = document.getElementById("img");
+    const imgFile = document.getElementById("imgFile");
+    const previewContainer = document.getElementById("imagePreview");
+    const previewImage = previewContainer.querySelector(".image-preview__image");
+    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
 
+    imgFile.addEventListener("change", function (){
+        const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            previewDefaultText.style.display = "none";
+            previewImage.style.display = "block";
+
+            reader.addEventListener("load", function (){
+                imgFile.setAttribute("src", this.result)
+                img.value = this.result;
+                previewImage.setAttribute("src", this.result);
+            });
+
+            reader.readAsDataURL(file);
+        }
+        else{
+            previewDefaultText.style.display = null;
+            previewImage.style.display = null;
+            previewImage.setAttribute("src", "");
+        }
+    })
+</script>
 </body>
 </html>

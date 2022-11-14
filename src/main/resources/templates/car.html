@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
     <meta charset="UTF-8">
     <title>Car2 Web Application</title>
@@ -34,7 +35,7 @@
 
     <div class=" row w-75 mx-auto" >
         <div class="col-1 mx-auto mt-5 car-list" th:each="car:${cars}">
-            <div class="d-block w-100 bg-black car-img ">
+            <div class="d-block w-100 bg-black car-img">
                 <img class="d-block mx-auto img-fluid car-img" style="height: 300px;" th:src="${car.img}"/>
             </div>
             <div class="d-flex w-100 car-detail">
@@ -45,10 +46,16 @@
                     <br/>
                     <span class="text-warning numbers" th:text="${car.gearSystem} + ' ' + ${car.distance} + ' km'"></span>
                 </div>
-                <div class="text-center pt-2 " style="width: 40%;">
-                    <button class="btn btn-warning border-0 price py-4" style="width: 90%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div  class="text-center pt-2 " style="width: 40%;">
+                    <!--<button class="btn btn-warning border-0 price py-4" style="width: 90%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <span class="fw-bold text-white" id="price" th:text="'฿ ' + ${car.price}"></span>
-                    </button>
+                    </button>-->
+                    <!--<button th:action="@{/car/update/sold/{id}(id=${car.id})}" method="GET" class="btn btn-warning border-0 price py-4" style="width: 90%;">
+                        <span class="fw-bold text-white" id="price" th:text="'฿ ' + ${car.price}"></span>
+                    </button>-->
+                    <a class="btn btn-warning border-0 price py-4" style="width: 90%;" th:href="@{/car/update/sold/{id}(id=${car.id})}">
+                        <span class="fw-bold text-white" id="price" th:text="'฿ ' + ${car.price}"></span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -65,9 +72,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">ตัดสินใจก่อน</button>
-<!--                    <form th:action="@{/car/update/sold}" method="POST">-->
+                    <form th:action="@{/car/update/sold}" method="POST">
                         <button type="submit" class="btn btn-warning text-white" data-bs-dismiss="modal">ซื้อเลย!</button>
-<!--                    </form>-->
+                    </form>
                 </div>
             </div>
         </div>

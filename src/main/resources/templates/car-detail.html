@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Car2 Web Application</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link th:rel="stylesheet" th:href="@{/css/style.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container-fluid p-0 pt-3">
+  <div class="row bg-warning w-75 rounded-4 mx-auto" style="height: 50px;">
+    <button class="btn mx-5 my-1 w-auto" type="button">
+      <a class="text-black text-decoration-none" th:href="@{/car}">ซื้อรถยนต์</a>
+    </button>
+    <button class="btn me-4 my-1 w-auto" type="button">
+      <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
+    </button>
+    <div class="dropdown w-auto h-75">
+      <button class="btn dropdown-toggle mx-4 my-2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+        ประเมินราคารถยนต์
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+        <li><a class="dropdown-item" th:href="@{/}">Action</a></li>
+        <li><a class="dropdown-item" th:href="@{/car}">Another action</a></li>
+        <li><a class="dropdown-item" th:href="@{/car/add}">Something else here</a></li>
+      </ul>
+    </div>
+    <input type="search"  class="form-control w-25 h-75 my-2 ms-auto me-4 rounded-4 bg-light" th:placeholder="ค้นรถยนต์"/>
+  </div>
+
+  <div class="d-flex row w-75 mx-auto mt-5">
+    <div class="w-75">
+      <div class="text-center bg-cream w-100 fw-bold py-2">
+        <span class="fs-3" th:text="${car.registrationYear} + ' ' + ${car.tier} + ' ' + ${car.carType}"></span>
+      </div>
+      <div class="col-1 mx-auto mt-4 p-3 car-list d-flex w-100 bg-light-brown">
+        <div class="d-block bg-black w-100">
+          <img class="d-block img-fluid mx-auto" style="height: 400px;" th:src="${car.img}"/>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex w-25">
+      <div class="w-100">
+        <span class="fw-bold fs-1 t-drab-green" th:text="${car.price} + ' บาท'"></span>
+        <div class="d-flex fs-5 w-100 pt-3">
+          <div style="width: 35%;">
+            <span class="fw-bold" th:text="'รุ่น '"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="'ประเภทรถ '"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="'สี '"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="'ผลิตปี '"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="'เกียร์ '"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="'เลขไมล์ '"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="'ความจุ '"></span>
+          </div>
+          <div class="t-light-brown" style="width: 65%;">
+            <span class="fw-bold" th:text="${car.tier}"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="${car.carType}"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="${car.color}"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="${car.registrationYear}"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="${car.gearSystem}"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="${car.distance} + ' กม.'"></span>
+            <br/>
+            <br/>
+            <span class="fw-bold" th:text="${car.capacity}"></span>
+          </div>
+        </div>
+        <button class="bg-red-pink border-0 py-2 px-5 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone mx-1" viewBox="0 0 16 16">
+            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+          </svg>
+          <span class="fw-bold" id="price" th:text="ติดต่อผู้ขาย"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-black">
+          <div class="mx-auto">
+            <img class="mx-auto" src="/images/carHeader.png" height="60"/>
+          </div>
+<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
+          <button type="button" class="close bg-black" data-bs-dismiss="modal" aria-label="Close">
+            <span class="text-white fs-1" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="text-warning fs-1 fw-bold">CAR2</p>
+          <p class="fs-5 t-dark-blue">062-365-9989</p>
+          <p class="fs-5 text-secondary">คุณ ธานี</p>
+          <p class="fs-5 t-dark-blue">063-562-3599</p>
+          <p class="fs-5 text-secondary">คุณ เปิ้ล</p>
+        </div>
+        <div class="modal-footer d-flex bg-light-brown">
+          <div class="w-100">
+            <div class="w-75 mx-auto d-flex">
+              <div class="w-25">
+                <p>Address</p>
+                <br>
+                <p>Email</p>
+                <p>Social</p>
+              </div>
+              <div class="w-75">
+                <p>: 94 ถ.ศรีนครินทร์ แขวงหนองบอน เขตประเวศ 10260</p>
+                <p>: tpzoomcar@hotmail.com</p>
+                <p>: facebook.com/TPZOOMCAR</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:insert="fragments/footer :: footer"></div>
+</div>
+
+</body>
+</html>

@@ -35,7 +35,7 @@ public class SignupController {
             model.addAttribute("signupError", "Username not available");
         }
         model.addAttribute("signupDto", new SignupDto());
-        return "signup";
+        return "login";
     }
 }
 

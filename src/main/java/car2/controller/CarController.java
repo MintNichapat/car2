@@ -24,11 +24,8 @@ public class CarController {
         return "car";
     }
 
-
     @ResponseBody
     public void getCar(Model model, @RequestParam UUID id) {
-        System.out.println(id);
-//        model.addAttribute("car", carService.getCarById(id));
     }
     @GetMapping("/add")
     public String getAddPage() {
@@ -46,7 +43,12 @@ public class CarController {
     public String updateSoldStatus(Model model, @PathVariable UUID id){
         /*เรียกใช้ service ที่ส่ง id ไปแก้ไขสถานะ*/
         carService.updateSoldStatus(id);
-        System.out.println("worked! id = "+ id);
         return "redirect:/car";
+    }
+
+    @GetMapping("/{id}")
+    public String getCarDetail(Model model, @PathVariable UUID id){
+        model.addAttribute("car", carService.getCarById(id));
+        return "car-detail";
     }
 }

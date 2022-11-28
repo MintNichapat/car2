@@ -89,7 +89,10 @@
                  th:if="${#fields.hasErrors('role')}"
                  th:errors="*{role}"></div>
         </div>
-        <button id="submit-button" type="submit" class="btn btn-warning">ลงทะเบียน</button>
+        <div class="text-center">
+            <button id="submit-button" type="submit" class="btn btn-warning my-4 w-25 fs-5">ยืนยัน</button>
+        </div>
+        <p class="text-center">กด “ยืนยัน” เพื่อยอมรับ เงื่อนไขการใช้บริการ และนโยบายความเป็นส่วนตัว</p>
     </form>
 </div>
 <script>

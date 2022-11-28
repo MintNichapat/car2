@@ -36,3 +36,30 @@
     display: none;
     width: 100%;
 }
+.bg-cream{
+    background-color: #FFF2D0;
+}
+
+.bg-light-brown{
+    background-color: #DDC074;
+}
+
+.bg-red-pink{
+    background-color: #D57171;
+}
+
+.t-drab-green{
+    color: #8A753F;
+}
+
+.t-light-brown{
+    color: #8F5533;
+}
+
+.bg-light-brown{
+    background-color: #D4B971;
+}
+
+.t-dark-blue{
+    color: #0762A9;
+}

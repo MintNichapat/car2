@@ -21,11 +21,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String getHomePage(Model model, Authentication auth) {
-        /*UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();*/
-//        System.out.println(userDetails);
-//        model.addAttribute("user", userService.getByUsername(userDetails.getUsername()));
-        // ต้องคืนค่าเป็นชื่อไฟล์ html template โดยในเมธอดนี้ คืนค่าเป็น home.html
         return "home";
     }
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Car2 Web Application</title>
@@ -44,16 +43,10 @@
                     <br/>
                     <span class="fw-bold" th:text="${car.carType} + ' ' + ${car.registrationYear}"></span>
                     <br/>
-                    <span class="text-warning numbers" th:text="${car.gearSystem} + ' ' + ${car.distance} + ' km'"></span>
+                    <span class="text-warning numbers" th:text="${car.gearSystem} + ' ' + ${car.distance} + ' km (' + ${car.status} + ')'"></span>
                 </div>
                 <div  class="text-center pt-2 " style="width: 40%;">
-                    <!--<button class="btn btn-warning border-0 price py-4" style="width: 90%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <span class="fw-bold text-white" id="price" th:text="'฿ ' + ${car.price}"></span>
-                    </button>-->
-                    <!--<button th:action="@{/car/update/sold/{id}(id=${car.id})}" method="GET" class="btn btn-warning border-0 price py-4" style="width: 90%;">
-                        <span class="fw-bold text-white" id="price" th:text="'฿ ' + ${car.price}"></span>
-                    </button>-->
-                    <a class="btn btn-warning border-0 price py-4" style="width: 90%;" th:href="@{/car/update/sold/{id}(id=${car.id})}">
+                    <a class="btn btn-warning border-0 price py-4" style="width: 90%;" th:href="@{/car/{id}(id=${car.id})}">
                         <span class="fw-bold text-white" id="price" th:text="'฿ ' + ${car.price}"></span>
                     </a>
                 </div>
@@ -81,11 +74,5 @@
     </div>
     <div th:insert="fragments/footer :: footer"></div>
 </div>
-<!--<script type="text/javascript">-->
-<!--    $("#submit").click(function () {-->
-<!--        var text = $("#tier").val();-->
-<!--        $("#modal_body").html(text);-->
-<!--    });-->
-<!--</script>-->
 </body>
 </html>

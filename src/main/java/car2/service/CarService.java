@@ -26,18 +26,9 @@ public class CarService {
     }
 
     public void updateSoldStatus(UUID id){
-        List<Car> cars = carRepo.findAll();
-        Car currentCar = new Car();
-        for (Car car : cars) {
-            System.out.println(car.getId());
-            if(car.getId().equals(id)){
-                currentCar = car;
-                break;
-            }
-        }
-        System.out.println(currentCar);
+        carRepo.findAll();
+        Car currentCar = carRepo.findById(id).get();
         currentCar.setStatus("sold");
         carRepo.save(currentCar);
     }
-
 }

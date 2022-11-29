@@ -5,6 +5,7 @@ import car2.repo.CarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,5 +31,19 @@ public class CarService {
         Car currentCar = carRepo.findById(id).get();
         currentCar.setStatus("sold");
         carRepo.save(currentCar);
+    }
+
+    public List<Car> searchFromCarType(String carType){
+        List<Car> carList = carRepo.findAll();
+        List<Car> filterCar = new ArrayList<>();
+        if(carType != null){
+            for (Car car: carList) {
+                if(car.getCarType().contains(carType)){
+                    filterCar.add(car);
+                }
+            }
+            return filterCar;
+        }
+        return carRepo.findAll();
     }
 }

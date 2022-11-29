@@ -19,20 +19,18 @@
         <button class="btn me-4 my-1 w-auto" type="button">
             <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
         </button>
-        <div class="dropdown w-auto h-75">
-            <button class="btn dropdown-toggle mx-4 my-2" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                ประเมินราคารถยนต์
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" th:href="@{/}">Action</a></li>
-                <li><a class="dropdown-item" th:href="@{/car}">Another action</a></li>
-                <li><a class="dropdown-item" th:href="@{/car/add}">Something else here</a></li>
-            </ul>
-        </div>
-        <input type="search"  class="form-control w-25 h-75 my-2 ms-auto me-4 rounded-4 bg-light" th:placeholder="ค้นรถยนต์"/>
+        <form class="w-25 bg-warning ms-auto me-5 my-1">
+            <div alight="left" class="d-flex rounded-4 bg-light">
+                <input type="text" id="carType" name="carType" class="form-control rounded-4 bg-light border-0" placeholder="ค้นรถยนต์" th:value="${carType}"/>
+                <button type="submit" value="Search" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
     </div>
-
-    <div class=" row w-75 mx-auto" >
+    <div class=" row w-75 mx-auto">
         <div class="col-1 mx-auto mt-5 car-list" th:each="car:${cars}">
             <div class="d-block w-100 bg-black car-img">
                 <img class="d-block mx-auto img-fluid car-img" style="height: 300px;" th:src="${car.img}"/>

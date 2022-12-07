@@ -33,12 +33,27 @@ public class CarService {
         carRepo.save(currentCar);
     }
 
-    public List<Car> searchFromCarType(String carType){
+    public List<Car> searchFromTier(String tier){
+        List<Car> carList = carRepo.findAll();
+        List<Car> filterCar = new ArrayList<>();
+        if(tier != null){
+            for (Car car: carList) {
+                if(car.getCarType().contains(tier)){
+                    filterCar.add(car);
+                }
+            }
+            return filterCar;
+        }
+        return carRepo.findAll();
+    }
+
+    public List<Car> getCarByType(String carType){
+        System.out.println(carType);
         List<Car> carList = carRepo.findAll();
         List<Car> filterCar = new ArrayList<>();
         if(carType != null){
             for (Car car: carList) {
-                if(car.getCarType().contains(carType)){
+                if(car.getCarType().equals(carType)){
                     filterCar.add(car);
                 }
             }

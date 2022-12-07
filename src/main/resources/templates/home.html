@@ -17,10 +17,10 @@
             <button class="btn mx-5 my-1 w-auto" type="button">
                 <a class="text-black text-decoration-none" th:href="@{/car}">ซื้อรถยนต์</a>
             </button>
-            <button class="btn me-4 my-1 w-auto" type="button">
+            <button th:if="${currentUser.role == 'ROLE_ADMIN'}" class="btn me-4 my-1 w-auto" type="button">
                 <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
             </button>
-            <span class="form-control h-75 my-2 ms-auto me-4 rounded-4 bg-light text-center" style="width:10%;"/>หน้าหลัก<span/>
+            <span class="form-control h-75 my-2 ms-auto me-4 border-0 t-dark-orange text-center" style="width:10%;"/>หน้าหลัก<span/>
         </div>
     </div>
 
@@ -30,26 +30,26 @@
     <div class="w-75 mx-auto">
         <p>TYPE</p>
         <div class="row w-100 border border-1 border-dark rounded-3 px-3 py-5">
-            <button class="col border-0 bg-white" type="button">
+            <a class="col border-0 bg-white text-center text-decoration-none" th:href="@{/car/get/{carType}(carType=SUV)}">
                 <img class="pb-2" src="/images/suv.png"/>
                 <br/>
-                <a class="text-decoration-none text-black" th:href="@{/}">SUV</a>
-            </button>
-            <button class="col border-0 bg-white" type="button">
-                <img class="pb-2" src="/images/sedan.png" />
+                <span class="text-black">SUV</span>
+            </a>
+            <a class="col border-0 bg-white text-center text-decoration-none" th:href="@{/car/get/{carType}(carType=Sedan)}">
+                <img class="pb-2" src="/images/sedan.png"/>
                 <br/>
-                <a class="text-decoration-none text-black" th:href="@{/}">Sedan</a>
-            </button>
-            <button class="col border-0 bg-white" type="button">
-                <img class="pb-2" src="/images/trucks.png" />
+                <span class="text-black">Sedan</span>
+            </a>
+            <a class="col border-0 bg-white text-center text-decoration-none" th:href="@{/car/get/{carType}(carType=Truck)}">
+                <img class="pb-2" src="/images/trucks.png"/>
                 <br/>
-                <a class="text-decoration-none text-black" th:href="@{/}">Trucks</a>
-            </button>
-            <button class="col border-0 bg-white" type="button">
-                <img class="pb-2" src="/images/coupe.png" />
+                <span class="text-black">Truck</span>
+            </a>
+            <a class="col border-0 bg-white text-center text-decoration-none" th:href="@{/car/get/{carType}(carType=Coupe)}">
+                <img class="pb-2" src="/images/coupe.png"/>
                 <br/>
-                <a class="text-decoration-none text-black" th:href="@{/}">Coupe</a>
-            </button>
+                <span class="text-black">Coupe</span>
+            </a>
         </div>
     </div>
 

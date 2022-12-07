@@ -2,8 +2,10 @@ package car2.controller;
 
 import car2.model.master.Car;
 import car2.service.CarService;
+import car2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,13 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping
-    public String getCars(Model model) {
+    public String getCars(Model model, Authentication auth) {
         model.addAttribute("cars", carService.getAll());
+        model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
         return "car";
     }
 
@@ -30,7 +36,8 @@ public class CarController {
     public void getCar(Model model, @RequestParam UUID id) {
     }
     @GetMapping("/add")
-    public String getAddPage() {
+    public String getAddPage(Model model, Authentication auth) {
+        model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
         return "car-add";
     }
 
@@ -49,8 +56,9 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public String getCarDetail(Model model, @PathVariable UUID id){
+    public String getCarDetail(Model model, Authentication auth,  @PathVariable UUID id){
         model.addAttribute("car", carService.getCarById(id));
+        model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
         return "car-detail";
     }
 
@@ -60,12 +68,12 @@ public class CarController {
         return "redirect:/car";
     }*/
 
-    @GetMapping("/search/{carType}")
-    public String searchFromCarType(Model model, @PathVariable String carType) {
-        List<Car> carList = carService.searchFromCarType(carType);
-        model.addAttribute("carList", carList);
-        model.addAttribute("carType", carType);
+    @GetMapping("/search/{tier}")
+    public String searchFromTier(Model model, @PathVariable String tier) {
+        model.addAttribute("carList", carService.searchFromTier(tier));
+        model.addAttribute("tier", tier);
 
         return "redirect:/car";
     }
+
 }

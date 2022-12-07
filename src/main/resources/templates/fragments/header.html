@@ -22,8 +22,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link text-white d-flex" href="#">
-                        <div class="d-block w-100 bg-black car-img mx-3">
+                        <div th:if="${currentUser.img == ''}" class="d-block w-100 bg-black car-img mx-3">
                             <img class="d-block mx-auto img-fluid car-img bg-warning rounded-circle p-2" style="width: 60px; height: 60px;" src="/images/user.png"/>
+                        </div>
+                        <div th:unless="${currentUser.img == ''}" class="d-block w-100 bg-black car-img mx-3">
+                            <img class="d-block mx-auto img-fluid car-img bg-warning rounded-circle p-2" style="width: 60px; height: 60px;" th:src="${currentUser.img}"/>
                         </div>
                          <b class=" my-3">สวัสดี<span class="ms-2" sec:authentication="name"></span></b>
                     </a>

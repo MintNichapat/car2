@@ -49,6 +49,10 @@ public class Car {
 
     private String status;
 
+    private String customerName;
+
+    private String customerPhone;
+
     public UUID getId() {
         return id;
     }
@@ -143,5 +147,21 @@ public class Car {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
     }
 }

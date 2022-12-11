@@ -19,27 +19,6 @@
         <button th:if="${currentUser.role == 'ROLE_ADMIN'} " class="btn me-4 my-1 w-auto" type="button">
             <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
         </button>
-        <!--<div class="dropdown w-auto my-1 py-1">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                ประเภทรถยนต์
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" th:href="@{/car/get/{carType}(carType=SUV)}">SUV</a></li>
-                <li><a class="dropdown-item" th:href="@{/car/get/{carType}(carType=Sedan)}">Sedan</a></li>
-                <li><a class="dropdown-item" th:href="@{/car/get/{carType}(carType=Truck)}">Truck</a></li>
-                <li><a class="dropdown-item" th:href="@{/car/get/{carType}(carType=Coupe)}">Coupe</a></li>
-            </ul>
-        </div>-->
-        <!--<div class="w-25 bg-warning ms-auto me-5 my-1">
-            <div alight="left" class="d-flex rounded-4 bg-light">
-                <input type="text" id="searchTier" name="searchTier" class="form-control rounded-4 bg-light border-0" placeholder="ค้นรถยนต์" th:value="${searchTier}"/>
-                <a class="btn" th:href="@{/search/{tier}(tier=${searchTier})}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>-->
         <span class="form-control h-75 my-2 ms-auto me-4 border-0 t-dark-orange text-center bg-warning" style="width:13%;"/>รายการลงขายรถยนต์<span/>
     </div>
     <div class=" row w-75 mx-auto">

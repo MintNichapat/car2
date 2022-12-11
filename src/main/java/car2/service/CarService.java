@@ -26,13 +26,6 @@ public class CarService {
         return record;
     }
 
-    public void updateSoldStatus(UUID id){
-        carRepo.findAll();
-        Car currentCar = carRepo.findById(id).get();
-        currentCar.setStatus("sold");
-        carRepo.save(currentCar);
-    }
-
     public List<Car> searchFromTier(String tier){
         List<Car> carList = carRepo.findAll();
         List<Car> filterCar = new ArrayList<>();
@@ -60,5 +53,48 @@ public class CarService {
             return filterCar;
         }
         return carRepo.findAll();
+    }
+
+    public void bookedCar(Car car){
+        carRepo.findAll();
+        Car currentCar = carRepo.findById(car.getId()).get();
+        currentCar.setStatus("booked");
+        currentCar.setCustomerName(car.getCustomerName());
+        currentCar.setCustomerPhone(car.getCustomerPhone());
+        carRepo.save(currentCar);
+    }
+
+    public void cancelBook(UUID id){
+        carRepo.findAll();
+        Car currentCar = carRepo.findById(id).get();
+        currentCar.setStatus("sale");
+        currentCar.setCustomerName(null);
+        currentCar.setCustomerPhone(null);
+        carRepo.save(currentCar);
+    }
+
+    public void updateSoldStatus(UUID id){
+        carRepo.findAll();
+        Car currentCar = carRepo.findById(id).get();
+        currentCar.setStatus("sold");
+        carRepo.save(currentCar);
+    }
+
+    public void edit(Car car){
+        carRepo.findAll();
+        Car currentCar = carRepo.findById(car.getId()).get();
+        currentCar.setImg(car.getImg());
+        currentCar.setCarType(car.getCarType());
+        currentCar.setTier(car.getTier());
+        currentCar.setIssueDate(car.getIssueDate());
+        currentCar.setDistance(car.getDistance());
+        currentCar.setGearSystem(car.getGearSystem());
+        currentCar.setRegistrationYear(car.getRegistrationYear());
+        currentCar.setCapacity(car.getCapacity());
+        currentCar.setColor(car.getColor());
+        currentCar.setPrice(car.getPrice());
+        currentCar.setCustomerName(car.getCustomerName());
+        currentCar.setCustomerPhone(car.getCustomerPhone());
+        carRepo.save(currentCar);
     }
 }

@@ -16,14 +16,14 @@
     <button class="btn mx-5 my-1 w-auto" type="button">
       <a class="text-black text-decoration-none" th:href="@{/car}">ซื้อรถยนต์</a>
     </button>
-    <button class="btn me-4 my-1 w-auto" type="button">
+    <button th:if="${currentUser != null && currentUser.role == 'ROLE_ADMIN'}" class="btn me-4 my-1 w-auto" type="button">
       <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
     </button>
     <span class="form-control h-75 my-2 ms-auto me-4 rounded-4 border-0 bg-warning t-dark-orange text-center" style="width:15%;"/>รายละเอียดรถยนต์<span/>
   </div>
 
   <div class="d-flex row w-75 mx-auto mt-5">
-    <div class="w-75">
+    <div class="w-75 text-center">
       <div class="text-center bg-cream w-100 fw-bold py-2">
         <span class="fs-3" th:text="${car.registrationYear} + ' ' + ${car.tier} + ' ' + ${car.carType}"></span>
       </div>
@@ -32,6 +32,22 @@
           <img class="d-block img-fluid mx-auto" style="height: 400px;" th:src="${car.img}"/>
         </div>
       </div>
+      <div th:if="${car.status == 'sale'}">
+        <span class="mx-auto t-drab-green fw-bold fs-4">สถานะ: ว่าง</span>
+      </div>
+      <div th:if="${car.status == 'booked'}">
+        <span class="mx-auto t-drab-green fw-bold fs-4">สถานะ: จองแล้ว</span>
+      </div>
+      <div th:if="${car.status == 'sold'}">
+        <span class="mx-auto t-drab-green fw-bold fs-4">สถานะ: ขายแล้ว</span>
+      </div>
+      <button th:if="${currentUser.role == 'ROLE_ADMIN' && car.status != 'sold'}" class="bg-warning border-0 py-2 px-5 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+        </svg>
+        <span class="fw-bold" th:text="แก้ไขข้อมูล"></span>
+      </button>
     </div>
     <div class="d-flex w-25">
       <div class="w-100">
@@ -80,11 +96,11 @@
             <span class="fw-bold" th:text="${car.capacity}"></span>
           </div>
         </div>
-        <button class="bg-red-pink border-0 py-2 px-5 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button th:if="${car.status != 'sold'}" class="bg-red-pink border-0 py-2 px-5 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone mx-1" viewBox="0 0 16 16">
             <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
           </svg>
-          <span class="fw-bold" id="price" th:text="ติดต่อผู้ขาย"></span>
+          <span class="fw-bold" th:text="ติดต่อผู้ขาย"></span>
         </button>
       </div>
     </div>
@@ -96,7 +112,6 @@
           <div class="mx-auto">
             <img class="mx-auto" src="/images/carHeader.png" height="60"/>
           </div>
-<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
           <button type="button" class="close bg-black" data-bs-dismiss="modal" aria-label="Close">
             <span class="text-white fs-1" aria-hidden="true">&times;</span>
           </button>
@@ -107,6 +122,15 @@
           <p class="fs-5 text-secondary">คุณ ธานี</p>
           <p class="fs-5 t-dark-blue">063-562-3599</p>
           <p class="fs-5 text-secondary">คุณ เปิ้ล</p>
+          <button th:if="${currentUser.role == 'ROLE_ADMIN' && car.status == 'sale'}" class="btn bg-green-light border-0 py-2 px-5 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+            ยืนยันการจอง
+          </button>
+          <button th:if="${currentUser.role == 'ROLE_ADMIN' && car.status == 'booked'}" class="btn bg-sky border-0 py-2 px-5 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+            ยืนยันการซื้อ
+          </button>
+          <button th:if="${currentUser.role == 'ROLE_ADMIN' && car.status == 'booked'}" class="btn bg-pink border-0 py-2 px-5 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+            ยกเลิกการจอง
+          </button>
         </div>
         <div class="modal-footer d-flex bg-light-brown">
           <div class="w-100">
@@ -122,15 +146,154 @@
                 <p>: tpzoomcar@hotmail.com</p>
                 <p>: facebook.com/TPZOOMCAR</p>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <p class="text-warning fs-1 fw-bold">จองรถยนต์</p>
+          <form th:action="@{/car/booked}" th:object="${car}" method="POST" >
+            <div class="mb-3">
+              <label for="inputCustomerName">ชื่อผู้ใช้</label>
+              <input id="inputCustomerName" type="text" class="form-control" name="customerName" th:field="*{customerName}">
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">เบอร์โทรศัพท์</label>
+              <input id="inputCustomerPhone" type="text" class="form-control" name="customerPhone" th:field="*{customerPhone}">
+            </div>
+
+            <input hidden type="text" class="form-control" name="id" th:field="*{id}">
+            <input hidden id="inputCarType" type="text" class="form-control" name="carType" th:field="*{carType}">
+            <input hidden id="inputTier" type="text" class="form-control" name="tier" th:field="*{tier}">
+            <input hidden id="inputIssueDate" type="text" class="form-control" name="issueDate" th:field="*{issueDate}">
+            <input hidden id="inputDistance" type="text" class="form-control" name="distance" th:field="*{distance}">
+            <input hidden id="inputGearSystem" type="text" class="form-control" name="gearSystem" th:field="*{gearSystem}">
+            <input hidden id="inputRegistrationYear" type="text" class="form-control" name="registrationYear" th:field="*{registrationYear}">
+            <input hidden id="inputCapacity" type="text" class="form-control" name="capacity" th:field="*{capacity}">
+            <input hidden id="inputImg" type="text" class="form-control" name="img" th:field="*{img}">
+            <input hidden id="inputColor" type="text" class="form-control" name="color" th:field="*{color}">
+            <input hidden id="inputPrice" type="text" class="form-control" name="price" th:field="*{price}">
+            <input hidden id="inputStatus" type="text" class="form-control" name="status" th:field="*{status}">
+
+            <button id="submit-button" type="submit" value="Update" class="btn btn-primary btn-warning d-block mx-auto">ยืนยันการจอง</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <p class="text-warning fs-1 fw-bold">สนใจซื้อรถคันนี้</p>
+          <span class="fs-5 t-dark-blue" th:text="'ชื่อผู้ใช้: ' + ${car.customerName}"></span>
+          <br>
+          <br>
+          <span class="fs-5 text-secondary" th:text="'เบอร์โทรศัพท์: ' + ${car.customerPhone}"></span>
+          <br>
+          <br>
+          <a class="btn bg-green-light border-0 py-2 px-4 mt-2 me-2" th:href="@{/car/buy/{id}(id=${car.id})}">
+            ยืนยันการซื้อ
+          </a>
+          <button class="btn bg-pink border-0 py-2 px-5 mt-2" data-bs-dismiss="modal" aria-label="Close">
+            ตัดสินใจก่อน
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <p class="text-warning fs-1 fw-bold">ยกเลิกการจองรถยนต์</p>
+          <span class="fs-5 t-dark-blue" th:text="'ชื่อผู้ใช้: ' + ${car.customerName}"></span>
+          <br>
+          <br>
+          <span class="fs-5 text-secondary" th:text="'เบอร์โทรศัพท์: ' + ${car.customerPhone}"></span>
+          <br>
+          <br>
+          <a class="btn bg-green-light border-0 py-2 px-4 mt-2 me-2" th:href="@{/car/cancel/{id}(id=${car.id})}">
+            ยกเลิกการจอง
+          </a>
+          <button class="btn bg-pink border-0 py-2 px-5 mt-2" data-bs-dismiss="modal" aria-label="Close">
+            ตัดสินใจก่อน
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="text-center">
+            <p class="text-warning fs-1 fw-bold">แก้ไขข้อมูล</p>
+          </div>
+          <form th:action="@{/car/edit}" th:object="${car}" method="POST" >
+            <input hidden type="text" class="form-control" name="id" th:field="*{id}">
+            <input hidden type="text" class="form-control" name="customerName" th:field="*{customerName}">
+            <input hidden type="text" class="form-control" name="customerPhone" th:field="*{customerPhone}">
+            <input hidden type="text" class="form-control" name="img" th:field="*{img}">
+            <input hidden type="text" class="form-control" name="status" th:field="*{status}">
+
+            <div class="mb-3">
+              <label for="inputCustomerPhone">ประเภทรถยนต์</label>
+              <select id="carType" type="text" class="form-control" name="carType" th:field="*{carType}">
+                <option value="SUV">SUV</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Trucks">Trucks</option>
+                <option value="Coupe">Coupe</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">รุ่น</label>
+              <input id="tier" type="text" class="form-control" name="tier" th:field="*{tier}">
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">วัน/เดือน/ปี ที่ผลิต</label>
+              <input id="issueDate" type="date" class="form-control" name="issueDate" th:field="*{issueDate}">
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">เลขไมล์</label>
+              <input id="distance" type="text" class="form-control" name="distance" th:field="*{distance}">
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">ระบบเกียร์</label>
+              <select id="gearSystem" type="text" class="form-control" name="gearSystem" th:field="*{gearSystem}">
+                <option value="Automatic" selected>Automatic Transmission</option>
+                <option value="Manual">Manual Transmission</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">ปีที่จดทะเบียน</label>
+              <input id="registrationYear" type="text" class="form-control" name="registrationYear" th:field="*{registrationYear}">
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">ความจุเครื่องยนต์</label>
+              <input id="capacity" type="text" class="form-control" name="capacity" th:field="*{capacity}">
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">สี</label>
+              <input id="color" type="text" class="form-control" name="color" th:field="*{color}">
+            </div>
+            <div class="mb-3">
+              <label for="inputCustomerPhone">ราคา</label>
+              <input id="price" type="text" class="form-control" name="price" th:field="*{price}">
+            </div>
+
+            <button type="submit" value="Update" class="btn btn-primary btn-warning d-block mx-auto">ยืนยัน</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <div th:insert="fragments/footer :: footer"></div>
 </div>
-
 </body>
 </html>

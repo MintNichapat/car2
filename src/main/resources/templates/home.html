@@ -17,7 +17,7 @@
             <button class="btn mx-5 my-1 w-auto" type="button">
                 <a class="text-black text-decoration-none" th:href="@{/car}">ซื้อรถยนต์</a>
             </button>
-            <button th:if="${currentUser.role == 'ROLE_ADMIN'}" class="btn me-4 my-1 w-auto" type="button">
+            <button th:if="${currentUser != null && currentUser.role == 'ROLE_ADMIN'}" class="btn me-4 my-1 w-auto" type="button">
                 <a class="text-black text-decoration-none" th:href="@{/car/add}">ขายรถยนต์</a>
             </button>
             <span class="form-control h-75 my-2 ms-auto me-4 border-0 t-dark-orange text-center" style="width:10%;"/>หน้าหลัก<span/>
@@ -40,19 +40,18 @@
                 <br/>
                 <span class="text-black">Sedan</span>
             </a>
-            <a class="col border-0 bg-white text-center text-decoration-none" th:href="@{/car/get/{carType}(carType=Truck)}">
+            <a class="col border-0 bg-white text-center text-decoration-none" th:href="@{/car/get/{carType}(carType=Trucks)}">
                 <img class="pb-2" src="/images/trucks.png"/>
                 <br/>
-                <span class="text-black">Truck</span>
+                <span class="text-black">Trucks</span>
             </a>
             <a class="col border-0 bg-white text-center text-decoration-none" th:href="@{/car/get/{carType}(carType=Coupe)}">
-                <img class="pb-2" src="/images/coupe.png"/>
+                <img class="pb-2" src="/images/coupe.png" style="height:65px;"/>
                 <br/>
                 <span class="text-black">Coupe</span>
             </a>
         </div>
     </div>
-
 </div>
 <div th:insert="fragments/footer :: footer"></div>
 </body>

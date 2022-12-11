@@ -32,7 +32,10 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model, Authentication auth) {
-        model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
+        if(auth != null){
+            model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
+            return "home";
+        }
         return "home";
     }
 

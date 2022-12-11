@@ -48,6 +48,12 @@ public class CarController {
         return "redirect:/car";
     }
 
+    @PostMapping("/edit")
+    public String editCar(@ModelAttribute Car car, Model model) {
+        carService.edit(car);
+        return "redirect:/car";
+    }
+
     @GetMapping("/update/sold/{id}")
     public String updateSoldStatus(Model model, @PathVariable UUID id){
         /*เรียกใช้ service ที่ส่ง id ไปแก้ไขสถานะ*/
@@ -62,12 +68,6 @@ public class CarController {
         return "car-detail";
     }
 
-/*    @PostMapping("/search/{carType}")
-    public String searchFromCarType(Model model, @PathVariable String carType){
-        model.addAttribute("cars", carService.searchFromCarType(carType));
-        return "redirect:/car";
-    }*/
-
     @GetMapping("/search/{tier}")
     public String searchFromTier(Model model, @PathVariable String tier) {
         model.addAttribute("carList", carService.searchFromTier(tier));
@@ -76,4 +76,24 @@ public class CarController {
         return "redirect:/car";
     }
 
+    @PostMapping("/booked")
+    public String bookedCar(Model model, Authentication auth, @ModelAttribute Car car){
+        model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
+        carService.bookedCar(car);
+        return "redirect:/car";
+    }
+
+    @GetMapping("/cancel/{id}")
+    public String cancelBookCar(Model model, Authentication auth, @PathVariable UUID id){
+        model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
+        carService.cancelBook(id);
+        return "redirect:/car";
+    }
+
+    @GetMapping("/buy/{id}")
+    public String bookedCar(Model model, Authentication auth, @PathVariable UUID id){
+        model.addAttribute("currentUser", userService.getByUsername(auth.getName()));
+        carService.updateSoldStatus(id);
+        return "redirect:/car";
+    }
 }
